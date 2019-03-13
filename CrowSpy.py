@@ -32,3 +32,5 @@ game_screen.fill(WHITE_COLOR)
 # and now yet another test - this with Atom again
 
 # back to the Zenva tutorial - additions below
+
+# in a minute, that is - now making edit to master on Git - see if can show locally, then in Atom
