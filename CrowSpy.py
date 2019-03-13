@@ -22,3 +22,7 @@ game_screen.fill(WHITE_COLOR)
 # yes, online edits are now showing up in local version after Fetch Origin function in GitHub Explorer
 
 # one more test to see if this is working the way I expect
+
+# now trying to use ATOM as a text editor - check to see if all versions update
+
+# yes - a change in ATOM updated in the local file after Git & Atom logged out
