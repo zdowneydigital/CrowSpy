@@ -18,3 +18,5 @@ game_screen.fill(WHITE_COLOR)
 # Testing out branches on GitHub here
 
 # online edit test - will it appear locally?
+
+# yes, online edits are now showing up in local version after Fetch Origin function in GitHub Explorer
