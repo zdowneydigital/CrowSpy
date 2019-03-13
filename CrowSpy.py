@@ -30,3 +30,5 @@ game_screen.fill(WHITE_COLOR)
 # online edit again - save as 'new branch' and see how it appears in Git Explorer
 
 # and now yet another test - this with Atom again
+
+# back to the Zenva tutorial - additions below
