@@ -16,3 +16,5 @@ game_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 game_screen.fill(WHITE_COLOR)
 
 # testing github branches and edits and whats-nots
+
+# trying an edit in browser to see if it will update locally using the Explorer thingy
