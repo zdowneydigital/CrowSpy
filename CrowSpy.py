@@ -26,3 +26,5 @@ game_screen.fill(WHITE_COLOR)
 # now trying to use ATOM as a text editor - check to see if all versions update
 
 # yes - a change in ATOM updated in the local file after Git & Atom logged out
+
+# online edit again - save as 'new branch' and see how it appears in Git Explorer
