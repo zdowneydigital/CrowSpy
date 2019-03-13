@@ -28,3 +28,5 @@ game_screen.fill(WHITE_COLOR)
 # yes - a change in ATOM updated in the local file after Git & Atom logged out
 
 # online edit again - save as 'new branch' and see how it appears in Git Explorer
+
+# and now yet another test - this with Atom again
