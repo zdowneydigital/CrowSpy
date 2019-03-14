@@ -34,3 +34,5 @@ game_screen.fill(WHITE_COLOR)
 # back to the Zenva tutorial - additions below
 
 # in a minute, that is - now making edit to master on Git - see if can show locally, then in Atom
+
+# quick edit in Atom - being used instead of IDLE on local machine - how easily will it save?
