@@ -135,6 +135,6 @@ quit()
 
 # making code object oriented by introducing classes and objects
 
-# asdfsdf
+# add new content by making a branch on Git, then upload file, then pull/merge
 
 
