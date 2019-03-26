@@ -38,6 +38,11 @@ class Game:
 
     def run_game_loop(self):
         is_game_over = False
+        direction = 0
+
+        player_character = PlayerCharacter('player.png', 375, 700, 50, 50)
+        enemy_0 = EnemyCharacter('enemy.png', 20, 600, 50, 50)
+        treasure = GameObject('treasure.png', 375, 50, 50, 50)
 
         # main game loop, used to update all gameplay such as movement, checks, graphics
         # runs until is_game_over = True
@@ -46,11 +51,45 @@ class Game:
             # loop to get all of the events occuring at any given time
             # events are most often moue movement, mouse/button clicks, or exit events
             for event in pygame.event.get():
-
                 # if we have a quite type event (exit out) then exit out of the game loop
                 if event.type == pygame.QUIT:
                     is_game_over = True
-                print(event)
+                # detect when key is pressed down
+                elif event.type == pygame.KEYDOWN:
+                    # move up if up key pressed
+                    if event.key == pygame.K_UP:
+                        direction = 1
+                    # move down if key pressed
+                    elif event.key == pygame.K_DOWN:
+                        direction = -1
+                # detect when key is released
+                elif event.type == pygame.KEYUP:
+                    # stop movement when key no longer pressed
+                    if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                        direction = 0
+            print(event)
+
+            # redraw the screen to be blank
+            self.game_screen.fill(WHITE_COLOR)
+
+            treasure.draw(self.game_screen)
+            
+            # update the player position
+            player_character.move(direction, self.height)
+            # draw the player at the new position
+            player_character.draw(self.game_screen)
+
+            # Move and draw the enemy character
+            enemy_0.move(self.width)
+            enemy_0.draw(self.game_screen)
+
+
+            # end game if collision between enemy and treasure
+            if player_character.detect_collision(enemy_0):
+                is_game_over = True
+            elif player_character.detect_collision(treasure):
+                is_game_over = True
+                
 
             # draw a rectangle on top of the game screen canvas (x, y, width, height)
             # commenting line below out
@@ -70,7 +109,97 @@ class Game:
 
             # tick the clock to update everything within the game
             clock.tick(self.TICK_RATE)
-        
+
+# Pygame pt 5
+# Implement game classes
+# Implement generic game object class
+
+class GameObject:
+
+    def __init__(self, image_path, x, y, width, height):
+        object_image = pygame.image.load(image_path)
+        # scale the image up
+        self.image = pygame.transform.scale(object_image, (width, height))
+
+        self.x_pos = x
+        self.y_pos = y
+
+        self.width = width
+        self.height = height
+
+    def draw(self, background):
+        background.blit(self.image, (self.x_pos, self.y_pos))
+
+# Pygame Pt 6
+# Implement game classes
+# Implement player character class and movement
+
+# Class to represent the character controlled by the player
+class PlayerCharacter(GameObject):
+
+    # How many tiles the character moves per second
+    SPEED = 10
+
+    # Move function will move character up if direction > 0 and down if < 0
+    def __init__(self, image_path, x, y, width, height):
+        super().__init__(image_path, x, y, width, height)
+
+    # Move function will move character up if direction > 0 and down if < 0
+    def move(self, direction, max_height):
+        if direction > 0:
+            self.y_pos -= self.SPEED
+        elif direction < 0:
+            self.y_pos += self.SPEED
+        # Make sure the character never goes past the bottom of the screen
+        if self.y_pos >= max_height - 40:
+            self.y_pos = max_height - 40
+
+# Pygame pt 8
+# implement collision detection
+# detect collisions with treasure and enemies
+            
+
+    def detect_collision(self, other_body):
+        if self.y_pos > other_body.y_pos + other_body.height:
+            return False
+        elif self.y_pos + self.height < other_body.y_pos:
+            return False
+            
+        if self.x_pos > other_body.x_pos + other_body.width:
+            return False
+        elif self.x_pos + self.width < other_body.x_pos:
+            return False
+            
+        return True
+
+
+
+# Pygame pt 7
+# Implement game classes
+# Implement enemy character class and bounds checking
+
+
+# Class to represent the enemy controlled by the player
+class EnemyCharacter(GameObject):
+
+    # How many tiles the enemy moves per second
+    SPEED = 10
+
+    # Move function will move enemy right once it hits the side of screen
+    # then it moves left until it hits the other side
+    def __init__(self, image_path, x, y, width, height):
+        super().__init__(image_path, x, y, width, height)
+
+    # automating movement, controlling by checking location
+    # Bounds checking, basically...
+    def move(self, max_width):
+        if self.x_pos <= 20:
+            self.SPEED = abs(self.SPEED)
+        elif self.x_pos >= max_width -40:
+            self.SPEED = -abs(self.SPEED)
+        self.x_pos += self.SPEED
+
+
 # adding next line in part 2 of tutorial
 pygame.init()
 
@@ -137,4 +266,4 @@ quit()
 
 # add new content by making a branch on Git, then upload file, then pull/merge
 
-
+# edit on ATOM - try to save as branch - see what happens
